@@ -99,6 +99,7 @@ async def encode(event, msg, scale=0):
     elif scale == 720:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 1280x720 -crf 27 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     try:
+        await edit.edit("trying to run ffmpeg_progress... encoder")
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
         await log.delete()
