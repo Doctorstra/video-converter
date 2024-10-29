@@ -90,6 +90,7 @@ async def encode(event, msg, scale=0):
     FT = time.time()
     progress = f"progress-{FT}.txt"
     cmd = ''
+    #await edit.edit("making cmd com......")
     if scale == 240:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 426x240 -crf 18 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     elif scale == 360:
@@ -99,6 +100,7 @@ async def encode(event, msg, scale=0):
     elif scale == 720:
         cmd = f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{name}""" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -s 1280x720 -crf 27 -c:a libopus -ac 2 -ab 128k -c:s copy """{out}""" -y'
     try:
+        await edit.edit("trying to run ffmpeg_progress...")
         await ffmpeg_progress(cmd, name, progress, FT, edit, ps_name, log=log)
     except Exception as e:
         await log.delete()
@@ -116,7 +118,7 @@ async def encode(event, msg, scale=0):
     f_size = os.path.getsize(out2)     
     text = f'**{_ps}D by** : @{BOT_UN}'
     UT = time.time()
-    await log.edit("Uploading file")
+    await log.edit("Uploading file...")
     if 'x-matroska' in mime:
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
