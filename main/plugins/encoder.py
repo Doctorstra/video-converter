@@ -55,6 +55,7 @@ async def encode(event, msg, scale=0):
     log = await LOG_START(event, f'**{_ps} PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
     log_end_text = f'**{_ps} PROCESS FINISHED**\n\n[Bot is free now]({SUPPORT_LINK})'
     try:
+        await edit.edit("trying to run ffmpeg_progress...")
         await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
         os.rmdir("encodemedia")
